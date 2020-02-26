@@ -12,6 +12,7 @@ import { store, persistor } from './redux/store';
 
 import './index.css';
 import App from './App';
+import { resolvers, typeDefs } from './graphql/resolvers';
 
 // Establish the connection to our backend
 const httpLink = createHttpLink({
@@ -24,7 +25,16 @@ const cache = new InMemoryCache();
 // Client
 const client = new ApolloClient({
   link: httpLink,
-  cache
+  cache,
+  typeDefs, // now our client has access to these new mutations that we just wrote
+  resolvers // now our client has access to these new mutations that we just wrote
+});
+
+// Khi app initiates, client được tạo ra, write data vô liền (khoi tao gia tri dau)
+client.writeData({
+  data: {
+    cartHidden: true
+  }
 });
 
 ReactDOM.render(
