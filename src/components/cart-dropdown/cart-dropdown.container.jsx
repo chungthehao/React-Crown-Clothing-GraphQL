@@ -5,14 +5,6 @@ import { gql } from 'apollo-boost';
 import CartDropdown from './cart-dropdown.component';
 
 
-// AddItemToCart đã định nghĩa ở type defs
-// addItemToCart là mutation đã viết ở resolvers
-// const ADD_ITEM_TO_CART = gql`
-//   mutation AddItemToCart {
-//     addItemToCart @client
-//   }
-// `;
-
 // ToggleCartHidden đã định nghĩa ở type defs
 // toggleCartHidden là mutation đã viết ở resolvers
 const TOGGLE_CART_HIDDEN = gql`
