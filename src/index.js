@@ -31,9 +31,11 @@ const client = new ApolloClient({
 });
 
 // Khi app initiates, client được tạo ra, write data vô liền (khoi tao gia tri dau)
+// Thay thế cho store của redux (local cache state)
 client.writeData({
   data: {
-    cartHidden: true
+    cartHidden: true,
+    cartItems: []
   }
 });
 
