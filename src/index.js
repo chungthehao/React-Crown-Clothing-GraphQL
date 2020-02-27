@@ -35,7 +35,8 @@ const client = new ApolloClient({
 client.writeData({
   data: {
     cartHidden: true,
-    cartItems: []
+    cartItems: [],
+    itemCount: 0 // make sure to update it whenever we add / clear / remove items
   }
 });
 

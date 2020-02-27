@@ -1,6 +1,6 @@
 import { gql } from 'apollo-boost';
 
-import { addItemToCart } from './cart.utils';
+import { addItemToCart, getCartItemCount } from './cart.utils';
 
 // - type definition
 // extend nhung gi da co san o phia graphql backend (o day chua co, nhung sau nay co thi no tu extend)
@@ -26,6 +26,12 @@ const GET_CART_HIDDEN = gql`
 const GET_CART_ITEMS = gql`
   {
     cartItems @client
+  }
+`;
+
+const GET_ITEM_COUNT = gql`
+  {
+    itemCount @client
   }
 `;
 
@@ -66,10 +72,16 @@ export const resolvers = {
       // add item to cart
       const newCartItems = addItemToCart(cartItems, item);
 
-      // Update local cache state
+      // Update cartItems in local cache state
       cache.writeQuery({
         query: GET_CART_ITEMS,
         data: { cartItems: newCartItems }
+      });
+
+      // Update itemCount
+      cache.writeQuery({
+        query: GET_ITEM_COUNT,
+        data: { itemCount: getCartItemCount(newCartItems) }
       });
 
       return newCartItems;
